@@ -6,23 +6,43 @@ let game;
 let interval;
 
 const createBoard = () => {
+
     board.innerHTML = "";
 
     for (let y = 0; y < game.rows; y++) {
+
         for (let x = 0; x < game.columns; x++) {
 
             const cell = document.createElement('div');
-            cell.classList.add('cell');  // add a class to the cell for styling
+
+            cell.classList.add('cell');
+
             cell.dataset.x = x;
             cell.dataset.y = y;
+
             board.appendChild(cell);
 
         }
     }
 }
 
+
 const Render = () => {
-    const cells = board.children; // Get all cells in the board
+
+    const cells = board.children;
+
+    // Clear
+
+    for (const cell of cells) {
+
+        cell.classList.remove(
+            "snake",
+            "head",
+            "food"
+        );
+
+    }
+
 
     // Snake
 
@@ -52,24 +72,39 @@ const Render = () => {
             }
         );
 
-
-
 }
 
-const startGame = () => {
-    // clearInterval(interval);
 
-    //instance of game
+const startGame = () => {
+
+    clearInterval(interval);
+
+    // instance of game
     game = new Game();
 
-    //craete a board
+    // create a board
     createBoard();
 
-    //render the snake
+    // render the snake
     Render();
 
 
+    // move the snake
+
+    interval = setInterval(() => {
+
+        game.update();
+        Render();
+
+        if (!game.running) {
+
+            clearInterval(interval);
+
+        }
+
+    }, game.speed);
+
 }
 
-startGame();
 
+startGame();
