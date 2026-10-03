@@ -1,5 +1,6 @@
 import { Snake } from './snake.js';
 
+
 export class Game {
 
     constructor() {
@@ -11,7 +12,12 @@ export class Game {
         this.snake = new Snake();
 
         // create food
-        
+        //craete food
+        this.food = createFood(
+            this.snake.getBody(), // Avoid placing food on the snake's body
+            this.rows,
+            this.columns
+        );
 
         // Set initial speed
         this.speed = 150;
