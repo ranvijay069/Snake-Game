@@ -73,7 +73,18 @@ const Render = () => {
 
             }
         );
+        const foodCell =
+        board.querySelector(
+            `[data-x="${game.food.x}"][data-y="${game.food.y}"]`
+        );
 
+    if (foodCell) {
+
+        foodCell.classList.add(
+            "food"
+        );
+
+    }
 }
 
 
